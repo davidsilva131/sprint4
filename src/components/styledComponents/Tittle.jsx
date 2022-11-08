@@ -1,7 +1,7 @@
 import React from "react";
 import './Tittle.scss'
 
-function Tittle({ text }) {
+const Tittle = ({ text }) => {
     return (
         <h1>{text}</h1>
     )
