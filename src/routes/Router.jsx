@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "../components/home/Home";
+import NavBar from "../components/layout/NavBar";
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
 import Verification from "../components/verification/Verification";
@@ -11,6 +13,9 @@ const Router = () => {
                 <Route path="/" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="verification" element={<Verification />} />
+                <Route element={<NavBar />} >
+                    <Route path="home" element={<Home />} />
+                </Route>
 
             </Routes>
 

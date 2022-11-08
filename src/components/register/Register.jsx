@@ -82,26 +82,6 @@ const Register = () => {
                 ),
               }}
             />
-            <CssTextField
-              label="Confirm you password"
-              type={showPassword ? 'text' : 'password'}
-              fullWidth
-              variant="standard"
-              {...register("password2", { required: "Please confirm you password" })}
-              error={!!errors?.password2}
-              helperText={errors?.password2 ? errors.password2.message : null}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    arial-label="toogle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <VisibilityIcon />}
-                  </IconButton>
-                ),
-              }}
-            />
           </div>
           <div className="register__footer">
             <ColorButton type="submit" fullWidth>Sing In</ColorButton>
