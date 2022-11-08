@@ -1,5 +1,5 @@
 import { ButtonGroup, Container, IconButton, InputAdornment } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Login.scss'
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -11,17 +11,34 @@ import Tittle from "../styledComponents/Tittle";
 import Subtittle from "../styledComponents/Subtittle";
 import Logo from "../styledComponents/Logo";
 import { VisibilityOff } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { userLoginAsync } from "../../redux/actions/userAction";
 
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const dispatch = useDispatch()
+  const { error, displayName } = useSelector(state => state.user)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (error) {
+      alert('Usuario o contraseña incorrecta')
+    }
+  }, [error]);
+  //Por ver
+  useEffect(() => {
+    if (displayName) {
+      navigate('home')
+    }
+  }, [displayName]);
+
 
   const onSubmit = (data) => {
-    console.log(data);
-
+    dispatch(userLoginAsync(data.email, data.password))
   }
 
   const handleClickShowPassword = () => {

@@ -1,4 +1,4 @@
-import { Container, IconButton, InputAdornment } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
 import { VisibilityOff } from "@mui/icons-material";
@@ -6,13 +6,22 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from "react-router-dom";
 import './Register.scss'
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { userRegisterAsync } from "../../redux/actions/userAction";
 
 const Register = () => {
+
+  const dispatch = useDispatch()
   const [showPassword, setShowPassword] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data);
+    const newUser = {
+      name: data.name,
+      email: data.email,
+      password: data.password
+    }
+    dispatch(userRegisterAsync(newUser))
 
   }
 
