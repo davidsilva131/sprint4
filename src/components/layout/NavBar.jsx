@@ -1,22 +1,21 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import './NavBar.scss'
 import { StyledHomeIcon, StyledSearchIcon, StyledHistoryIcon, StyledAccountIcon } from "../styledComponents/MaterialComponents";
-import { IconButton } from "@mui/material";
 const NavBar = () => {
 
-    const buttons = [
-        StyledHomeIcon,
-        StyledSearchIcon,
-        StyledHistoryIcon,
-        StyledAccountIcon]
+    const navigate = useNavigate()
+
+    const handleClickNav = (route) => {
+        navigate(route)
+    }
 
     return (
         <>
             <Outlet />
             <div className="navbar">
-                <StyledHomeIcon />
-                <StyledSearchIcon />
+                <StyledHomeIcon onClick={() => { handleClickNav('home') }} />
+                <StyledSearchIcon onClick={() => { handleClickNav('search') }} />
                 <StyledHistoryIcon />
                 <StyledAccountIcon />
             </div>
