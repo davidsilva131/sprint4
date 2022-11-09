@@ -4,6 +4,7 @@ import { Home } from "../components/home/Home";
 import NavBar from "../components/layout/NavBar";
 import Login from "../components/login/Login";
 import Register from "../components/register/Register";
+import Search from "../components/search/Search";
 import Verification from "../components/verification/Verification";
 
 const Router = () => {
@@ -15,6 +16,7 @@ const Router = () => {
                 <Route path="verification" element={<Verification />} />
                 <Route element={<NavBar />} >
                     <Route path="home" element={<Home />} />
+                    <Route path="search" element={<Search />} />
                 </Route>
 
             </Routes>
