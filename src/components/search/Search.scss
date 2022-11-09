@@ -1,0 +1,39 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-top: 50px;
+    height: calc(100vh - 130px) ;
+
+    &__recent{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 150px;
+        &__tittle{
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16.41px;
+            color: #414141;
+            margin-bottom: 5px;
+        }
+        &__search{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: -0.3px;
+            color:#A7A7A7;
+            cursor: pointer;
+        }
+    }
+
+        &__container{
+            width: 100%;
+            height: 100%;
+            background-color: aqua;
+        }
+}
