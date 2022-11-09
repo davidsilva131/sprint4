@@ -4,6 +4,7 @@ import './Home.scss'
 import { PersonalLocation } from "../styledComponents/MaterialComponents";
 import { Carousel } from "../styledComponents/Carousel";
 import RestaurantCard from "./RestaurantCard";
+import FiltersCards from "./FiltersCards";
 export const Home = () => {
     return (
         <div className="home">
@@ -19,7 +20,7 @@ export const Home = () => {
                     <Carousel />
                 </div>
                 <section className="home__filters">
-
+                    <FiltersCards />
                 </section>
                 <section className="home__restaurants">
                     <RestaurantCard />

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import promo1 from '../../images/Promo 1.png'
 import promo2 from '../../images/Promo 2.png'
-import ArrowBack from '@mui/icons-material/ArrowBackIos';
 import './Carousel.scss'
-import { IconButton } from "@mui/material";
 import { StyledBackIcon, StyledNextIcon } from "./MaterialComponents";
 
 export const Carousel = () => {
@@ -19,9 +17,9 @@ export const Carousel = () => {
         setSelectedIndex(nextIndex)
     }
 
-    const previous = () => {
-        selectNewImage(selectedIndex, images, false)
-    }
+    // const previous = () => {
+    //     selectNewImage(selectedIndex, images, false)
+    // }
 
     const next = () => {
         selectNewImage(selectedIndex, images)
@@ -30,7 +28,7 @@ export const Carousel = () => {
     return (
         <>
             <aside className="carousel">
-                <StyledBackIcon onClick={previous} />
+                <StyledBackIcon />
                 <img src={`${selectedImage}`} alt="Promos" loading="lazy"></img>
                 <StyledNextIcon onClick={next} />
             </aside>
