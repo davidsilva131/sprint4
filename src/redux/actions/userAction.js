@@ -1,44 +1,90 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth"
 import { auth } from "../../firebase/firebaseConfig"
 import { userTypes } from "../types/userTypes"
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
-export const userRegisterAsync = ({ email, password, name }) => {
+export const userRegisterAsync = ({ email, password, name, avatar }) => {
     return (dispatch) => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then(async () => {
-                await updateProfile(auth.currentUser, { displayName: name })
-                dispatch(userRegisterSync({ name, email, error: false }))
+            .then(async ({ user }) => {
+                const { accessToken } = user.auth.currentUser;
+                await updateProfile(auth.currentUser,
+                    {
+                        displayName: name,
+                        photoURL: avatar
+                    })
+                dispatch(
+                    userRegisterSync({
+                        name,
+                        email,
+                        accessToken,
+                        photoURL: avatar,
+                        error: false
+                    }))
             })
             .catch((error) => {
-                console.log(error);
-                dispatch(userRegisterSync({ name, email, error: true }))
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                dispatch(userRegisterSync({ error: true, errorMessage }))
             })
     }
 }
 
-const userRegisterSync = ({ name, email, error }) => {
+const userRegisterSync = (user) => {
     return {
         type: userTypes.CREATE_USER,
-        payload: { name, email, error },
+        payload: { ...user },
     };
 }
 
 export const userLoginAsync = (email, password) => {
-    return async (dispatch) => {
-        try {
-            const response = await signInWithEmailAndPassword(auth, email, password);
-            dispatch(userLoginSync({ ...response.user, error: false }))
-        } catch (error) {
-            dispatch(userLoginSync({ error: true }))
-        }
+    return (dispatch) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({ user }) => {
+                const { displayName, accessToken, photoURL } = user.auth.currentUser;
+                dispatch(
+                    userLoginSync({
+                        email,
+                        name: displayName,
+                        accessToken,
+                        photoURL,
+                        error: false
+                    })
+                )
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+                dispatch(userLoginSync({ email, error: true, errorMessage }))
+            })
     }
 }
 
 const userLoginSync = (user) => {
     return {
         type: userTypes.LOGIN_USER,
-        payload: user
+        payload: { ...user }
     }
 }
 
+export const userLogoutAsync = () => {
+    return (dispatch) => {
+        signOut(auth)
+            .then(() => {
+                dispatch(userLogoutSync());
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+};
+
+const userLogoutSync = () => {
+    return {
+        type: userTypes.USER_LOGOUT,
+    };
+};

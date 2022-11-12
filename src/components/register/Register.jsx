@@ -1,4 +1,6 @@
 import { Container, IconButton } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import React, { useState } from "react";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
 import { VisibilityOff } from "@mui/icons-material";
@@ -6,14 +8,28 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from "react-router-dom";
 import './Register.scss'
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegisterAsync } from "../../redux/actions/userAction";
 
 const Register = () => {
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
   const dispatch = useDispatch()
+  const { error, errorMessage } = useSelector((store) => store.user);
   const [showPassword, setShowPassword] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm()
+  const [snack, setSnack] = useState({ open: false, variant: 'success', messagge: '' });
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnack({ open: false, ...snack })
+  };
+
+  const { open, variant, messagge } = snack;
 
   const onSubmit = (data) => {
     const newUser = {
@@ -22,7 +38,11 @@ const Register = () => {
       password: data.password
     }
     dispatch(userRegisterAsync(newUser))
-
+    if (error) {
+      setSnack({ open: true, variant: 'error', messagge: 'No se ha podido crear la cuenta' });
+    } else {
+      setSnack({ open: true, variant: 'success', messagge: 'Cuenta creada con exito!' });
+    }
   }
 
   const handleClickShowPassword = () => {
@@ -34,7 +54,6 @@ const Register = () => {
       <Container>
         <div className="register__tittle">
           <h1>Create account</h1>
-
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="register__form">
           <div className="register__form__inputs">
@@ -84,10 +103,15 @@ const Register = () => {
             />
           </div>
           <div className="register__footer">
-            <ColorButton type="submit" fullWidth>Sing In</ColorButton>
+            <ColorButton onClick={(handleClick) => { }} type="submit" fullWidth>Sing In</ColorButton>
             <Link to='/'>Login</Link>
           </div>
         </form>
+        <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={6000} onClose={handleClose} >
+          <Alert onClose={handleClose} severity={variant} sx={{ width: '100%' }}>
+            {messagge}
+          </Alert>
+        </Snackbar>
       </Container>
     </>
   )

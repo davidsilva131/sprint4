@@ -1,5 +1,5 @@
-import { ButtonGroup, Container, IconButton, InputAdornment } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Alert, ButtonGroup, Container, IconButton, InputAdornment, Snackbar } from "@mui/material";
+import React, { useState } from "react";
 import './Login.scss'
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -22,28 +22,26 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const dispatch = useDispatch()
   const { error, displayName } = useSelector(state => state.user)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (error) {
-      alert('Usuario o contraseña incorrecta')
-    }
-  }, [error]);
-  //Por ver
-  useEffect(() => {
-    if (displayName) {
-      navigate('home')
-    }
-  }, [displayName]);
-
+  const [snack, setSnack] = useState({ open: false, variant: 'success', messagge: '' });
+  const { open, variant, messagge } = snack;
 
   const onSubmit = (data) => {
     dispatch(userLoginAsync(data.email, data.password))
+    if (error) {
+      setSnack({ open: true, variant: 'error', messagge: 'Correo o contraseña incorrecta' });
+    }
   }
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnack({ open: false, ...snack })
+  };
 
   return (
     <Container>
@@ -103,7 +101,11 @@ const Login = () => {
           <Link to="register">Create account</Link>
         </div>
       </form>
-
+      <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={6000} onClose={handleClose} >
+        <Alert onClose={handleClose} severity={variant} sx={{ width: '100%' }}>
+          {messagge}
+        </Alert>
+      </Snackbar>
     </Container>
   )
 }

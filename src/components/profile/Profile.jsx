@@ -86,6 +86,14 @@ const Profile = () => {
                             <ArrowForward />
                         </div>
                     </CardActionArea>
+                    <CardActionArea sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
+                        <div className="profile__options__card">
+                            <div>
+                                <span>Logout</span>
+                            </div>
+                            <ArrowForward />
+                        </div>
+                    </CardActionArea>
                 </aside>
             </div>
         </Container>
