@@ -16,42 +16,42 @@ import PublicRouter from "./PublicRouter";
 
 const Router = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined)
-    const [check, setCheck] = useState(false)
+    // const [check, setCheck] = useState(false)
 
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         console.log(user.uid);
-    //         if (user?.uid) {
-    //             setIsLoggedIn(true)
-    //         } else {
-    //             setIsLoggedIn(false)
-    //         }
-    //         setCheck(false)
-    //     })
-    // }, [setIsLoggedIn, setCheck]);
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            console.log(user.uid);
+            if (user?.uid) {
+                setIsLoggedIn(true)
+            } else {
+                setIsLoggedIn(false)
+            }
+            // setCheck(true)
+        })
+    }, [setIsLoggedIn]);
 
-    if (check) {
-        return (
-            <Box sx={{ display: 'flex' }}>
-                <CircularProgress />
-            </Box>
-        )
-    }
+    // if (!check) {
+    //     return (
+    //         <Box sx={{ display: 'flex' }}>
+    //             <CircularProgress />
+    //         </Box>
+    //     )
+    // }
     return (
         <BrowserRouter>
             <Routes>
-                {/* <Route element={<PublicRouter isAuthentication={isLoggedIn} />}> */}
-                <Route path="/" element={<Login />} />
-                <Route path="register" element={<Register />} />
-                <Route path="verification" element={<Verification />} />
-                {/* </Route> */}
-                {/* <Route element={<PrivateRouter isAuthentication={isLoggedIn} />}> */}
-                <Route element={<NavBar />} >
-                    <Route path="home" element={<Home />} />
-                    <Route path="search" element={<Search />} />
-                    <Route path="profile" element={<Profile />} />
+                <Route element={<PublicRouter isAuthentication={isLoggedIn} />}>
+                    <Route path="/" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                    <Route path="verification" element={<Verification />} />
                 </Route>
-                {/* </Route> */}
+                <Route element={<NavBar />} >
+                    <Route element={<PrivateRouter isAuthentication={isLoggedIn} />}>
+                        <Route path="home" element={<Home />} />
+                        <Route path="search" element={<Search />} />
+                        <Route path="profile" element={<Profile />} />
+                    </Route>
+                </Route>
                 <Route path="*" element={<NoMatch />} />
             </Routes>
         </BrowserRouter>

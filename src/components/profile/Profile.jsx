@@ -11,7 +11,14 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import './Profile.scss'
+import { useDispatch } from "react-redux";
+import { userLogoutAsync } from "../../redux/actions/userAction";
+
 const Profile = () => {
+    const dispatch = useDispatch();
+    const onCloseSession = () => {
+        dispatch(userLogoutAsync());
+    };
     return (
         <Container>
             <div className="profile">
@@ -86,7 +93,7 @@ const Profile = () => {
                             <ArrowForward />
                         </div>
                     </CardActionArea>
-                    <CardActionArea sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
+                    <CardActionArea onClick={onCloseSession} sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
                         <div className="profile__options__card">
                             <div>
                                 <span>Logout</span>
