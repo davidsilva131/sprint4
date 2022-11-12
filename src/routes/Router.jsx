@@ -7,6 +7,7 @@ import NavBar from "../components/layout/NavBar";
 import Login from "../components/login/Login";
 import NoMatch from "../components/nomatch/NoMatch";
 import Profile from "../components/profile/Profile";
+import ProfileEdit from "../components/profile/ProfileEdit";
 import Register from "../components/register/Register";
 import Search from "../components/search/Search";
 import Verification from "../components/verification/Verification";
@@ -45,12 +46,13 @@ const Router = () => {
                     <Route path="register" element={<Register />} />
                     <Route path="verification" element={<Verification />} />
                 </Route>
-                <Route element={<NavBar />} >
-                    <Route element={<PrivateRouter isAuthentication={isLoggedIn} />}>
+                <Route element={<PrivateRouter isAuthentication={isLoggedIn} />}>
+                    <Route element={<NavBar />} >
                         <Route path="home" element={<Home />} />
                         <Route path="search" element={<Search />} />
                         <Route path="profile" element={<Profile />} />
                     </Route>
+                    <Route path="profileedit" element={<ProfileEdit />} />
                 </Route>
                 <Route path="*" element={<NoMatch />} />
             </Routes>

@@ -13,12 +13,18 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import './Profile.scss'
 import { useDispatch } from "react-redux";
 import { userLogoutAsync } from "../../redux/actions/userAction";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const onCloseSession = () => {
         dispatch(userLogoutAsync());
     };
+
+    const handleAccountEdit = () => {
+        navigate('/profileedit')
+    }
     return (
         <Container>
             <div className="profile">
@@ -30,7 +36,7 @@ const Profile = () => {
                     </div>
                 </aside>
                 <aside className="profile__options">
-                    <CardActionArea sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
+                    <CardActionArea onClick={handleAccountEdit} sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
                         <div className="profile__options__card">
                             <div>
                                 <PersonIcon />

@@ -29,6 +29,28 @@ export const CssTextField = styled(TextField)({
     },
 });
 
+export const StyledEditInput = styled(TextField)(({
+    borderRadius: '10px',
+    backgroundColor: '#F2F2F2',
+    '& label.Mui-focused': {
+        color: '#FFE031',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: '#FFE031',
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: 'transparent',
+        },
+        '&:hover fieldset': {
+            borderColor: 'transpaernt',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'transparent',
+        },
+    }
+}))
+
 export const StyledSearchInput = styled(TextField)(({
     borderRadius: '10px',
     backgroundColor: '#F2F2F2',
@@ -43,10 +65,10 @@ export const StyledSearchInput = styled(TextField)(({
             borderColor: 'transparent',
         },
         '&:hover fieldset': {
-            borderColor: '#FFE031',
+            borderColor: 'transpaernt',
         },
         '&.Mui-focused fieldset': {
-            borderColor: '#FFE031',
+            borderColor: 'transparent',
         },
     }
 }))
