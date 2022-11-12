@@ -10,7 +10,7 @@ import './Register.scss'
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { userRegisterAsync } from "../../redux/actions/userAction";
-
+import { fileUpLoad } from '../../services/fileUpload.js'
 const Register = () => {
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -31,11 +31,22 @@ const Register = () => {
 
   const { open, variant, messagge } = snack;
 
-  const onSubmit = (data) => {
+  const onUploadImage = async (image) => {
+    const url = await fileUpLoad(image);
+    if (url) {
+      return url;
+    } else {
+      setSnack({ open: true, variant: 'error', messagge: 'No se ha podido cargar la imagen' });
+    }
+  }
+
+  const onSubmit = async (data) => {
+    const photoUrl = await onUploadImage(data.image[0])
     const newUser = {
       name: data.name,
       email: data.email,
-      password: data.password
+      password: data.password,
+      avatar: photoUrl
     }
     dispatch(userRegisterAsync(newUser))
     if (error) {
@@ -101,6 +112,7 @@ const Register = () => {
                 ),
               }}
             />
+            <CssTextField fullWidth type="file" {...register("image", { required: "Avatar required" })} />
           </div>
           <div className="register__footer">
             <ColorButton onClick={(handleClick) => { }} type="submit" fullWidth>Sing In</ColorButton>
