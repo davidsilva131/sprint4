@@ -9,6 +9,7 @@ import NoMatch from "../components/nomatch/NoMatch";
 import Profile from "../components/profile/Profile";
 import ProfileEdit from "../components/profile/ProfileEdit";
 import Register from "../components/register/Register";
+import Restaurant from "../components/restaurant/Restaurant";
 import Search from "../components/search/Search";
 import Verification from "../components/verification/Verification";
 import { auth } from "../firebase/firebaseConfig";
@@ -52,6 +53,7 @@ const Router = () => {
                         <Route path="search" element={<Search />} />
                         <Route path="profile" element={<Profile />} />
                     </Route>
+                    <Route path="restaurant" element={<Restaurant />} />
                     <Route path="profileedit" element={<ProfileEdit />} />
                 </Route>
                 <Route path="*" element={<NoMatch />} />

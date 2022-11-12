@@ -1,25 +1,18 @@
 import { Container } from "@mui/system";
 import React from "react";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import './ProfileEdit.scss'
-import { useNavigate } from "react-router-dom";
 import { Avatar, InputAdornment } from "@mui/material";
 import { ColorButton, StyledEditInput } from "../styledComponents/MaterialComponents";
 import EditIcon from '@mui/icons-material/Edit';
+import GoBack from "../styledComponents/GoBack";
 const ProfileEdit = () => {
 
-    const navigate = useNavigate()
-    const handleGoBack = () => {
-        navigate(-1)
-    }
     return (
         <Container>
             <div className="profileEdit">
                 <aside>
                     <div className="profileEdit__head">
-                        <span style={{ cursor: 'pointer' }} onClick={handleGoBack}>
-                            <ArrowBackIosIcon />
-                        </span>
+                        <GoBack />
                         <span>Profile</span>
                     </div>
                     <section className="profileEdit__image">

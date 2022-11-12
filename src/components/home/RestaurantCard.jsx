@@ -1,12 +1,13 @@
 import { CardActionArea, Rating } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './RestaurantCard.scss'
 const RestaurantCard = () => {
     const [ratingValue, setRatingValue] = React.useState(2);
-
+    const navigate = useNavigate()
     const handleClickRestaurant = () => {
         console.log('da click al restaurante');
-
+        navigate('/restaurant')
     }
     return (
         <CardActionArea onClick={handleClickRestaurant} sx={{ width: '320px', height: '106px' }}>

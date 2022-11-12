@@ -1,0 +1,106 @@
+.restaurant{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    gap: 20px;
+    &__head{
+        display: flex;
+        justify-content: space-between;
+        width: 55%;
+        height: 41px;
+        gap: 20px;
+        img{
+            height: 41px;
+            object-fit: cover;
+        }
+    }
+    &__card{
+        display: flex;
+        gap: 10px;
+        border-radius: 10px;
+        width: 100%;
+        height: 100px;
+        img{
+            border-radius: 10px;
+            width: 137px;
+            height: 100px;
+            object-fit: cover;
+        }
+        &__info{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            div{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+            }
+        }
+        &__time{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            width: 51px;
+            height: 16px;
+            background-color: #F2F2F2;
+            font-weight: 300;
+            font-size: 10px;
+            line-height: 11.72px;
+            letter-spacing: -0.3px;
+        }
+        &__name{
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 16.41px;
+            letter-spacing: -0.3px;
+        }
+        &__description{
+            font-weight: 300;
+            font-size: 10px;
+            line-height: 11.72px;
+            letter-spacing: -0.3px;
+        }
+    }
+    &__filter{
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        height: 70px;
+        overflow: auto;
+    }
+    &__food{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+        overflow: auto;
+        justify-content: center;
+    }
+}
+
+.food{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &__name{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.41px;
+        letter-spacing: -0.3px;
+        color: #414141;
+    }
+    &__price{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.41px;
+        letter-spacing: -0.3px;
+        color:#A7A7A7;
+    }
+}

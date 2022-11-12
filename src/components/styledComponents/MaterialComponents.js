@@ -33,10 +33,10 @@ export const StyledEditInput = styled(TextField)(({
     borderRadius: '10px',
     backgroundColor: '#F2F2F2',
     '& label.Mui-focused': {
-        color: '#FFE031',
+        color: 'transparent',
     },
     '& .MuiInput-underline:after': {
-        borderBottomColor: '#FFE031',
+        borderBottomColor: 'transparent',
     },
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
