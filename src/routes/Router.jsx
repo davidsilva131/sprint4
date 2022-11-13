@@ -18,7 +18,7 @@ import PublicRouter from "./PublicRouter";
 
 const Router = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined)
-    // const [check, setCheck] = useState(false)
+    // const [check, setCheck] = useState(true)
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -51,7 +51,7 @@ const Router = () => {
                     <Route element={<NavBar />} >
                         <Route path="home" element={<Home />} />
                         <Route path="search" element={<Search />} />
-                        <Route path="profile" element={<Profile />} />
+                        <Route path="profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
                     </Route>
                     <Route path="restaurant" element={<Restaurant />} />
                     <Route path="profileedit" element={<ProfileEdit />} />

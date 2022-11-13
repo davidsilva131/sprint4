@@ -15,11 +15,13 @@ import { useDispatch } from "react-redux";
 import { userLogoutAsync } from "../../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
 
-const Profile = () => {
+const Profile = ({ setIsLoggedIn }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
     const onCloseSession = () => {
         dispatch(userLogoutAsync());
+        setIsLoggedIn(false)
     };
 
     const handleAccountEdit = () => {
