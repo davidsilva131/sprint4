@@ -2,6 +2,7 @@ import { Box, CircularProgress } from "@mui/material";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AllOrders from "../components/allorders/AllOrders";
 import FoodDetails from "../components/foodDetails/FoodDetails";
 import { Home } from "../components/home/Home";
 import NavBar from "../components/layout/NavBar";
@@ -53,6 +54,7 @@ const Router = () => {
                         <Route path="home" element={<Home />} />
                         <Route path="search" element={<Search />} />
                         <Route path="profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
+                        <Route path="allorders" element={<AllOrders />} />
                     </Route>
                     <Route path="restaurant" element={<Restaurant />} />
                     <Route path="profileedit" element={<ProfileEdit />} />

@@ -16,7 +16,7 @@ const NavBar = () => {
             <div className="navbar">
                 <StyledHomeIcon onClick={() => { handleClickNav('home') }} />
                 <StyledSearchIcon onClick={() => { handleClickNav('search') }} />
-                <StyledHistoryIcon />
+                <StyledHistoryIcon onClick={() => { handleClickNav('allorders') }} />
                 <StyledAccountIcon onClick={() => { handleClickNav('profile') }} />
             </div>
         </>
