@@ -27,6 +27,9 @@ const Profile = ({ setIsLoggedIn }) => {
     const handleAccountEdit = () => {
         navigate('/profileedit')
     }
+    const handlePayment = () => {
+        navigate('/payment')
+    }
     return (
         <Container>
             <div className="profile">
@@ -56,7 +59,7 @@ const Profile = ({ setIsLoggedIn }) => {
                             <Switch defaultChecked />
                         </div>
                     </CardActionArea>
-                    <CardActionArea sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
+                    <CardActionArea onClick={handlePayment} sx={{ width: '100%', heigth: '50px', borderRadius: '10px' }}>
                         <div className="profile__options__card">
                             <div>
                                 <PaymentIcon />

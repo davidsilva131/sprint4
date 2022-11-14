@@ -8,6 +8,8 @@ import { Home } from "../components/home/Home";
 import NavBar from "../components/layout/NavBar";
 import Login from "../components/login/Login";
 import NoMatch from "../components/nomatch/NoMatch";
+import AddCard from "../components/payment/AddCard";
+import Payment from "../components/payment/Payment";
 import Profile from "../components/profile/Profile";
 import ProfileEdit from "../components/profile/ProfileEdit";
 import Register from "../components/register/Register";
@@ -59,6 +61,8 @@ const Router = () => {
                     <Route path="restaurant" element={<Restaurant />} />
                     <Route path="profileedit" element={<ProfileEdit />} />
                     <Route path="fooddetails" element={<FoodDetails />} />
+                    <Route path="payment" element={<Payment />} />
+                    <Route path="addcard" element={<AddCard />} />
                 </Route>
                 <Route path="*" element={<NoMatch />} />
             </Routes>

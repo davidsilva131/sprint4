@@ -1,0 +1,30 @@
+.payment{
+    width: 100%;
+    height: calc(100vh - 20px);
+    &__tittle{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+        margin-top: 10px;
+        span{
+            font-size: 14px;
+            line-height: 16.41px;
+            font-weight: 400;
+            color: #414141;
+        }
+    }
+    &__body{
+        display: flex;
+        width: 100%;
+        height: calc(100vh - 100px);
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 40px;
+        &__cards{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
