@@ -1,11 +1,18 @@
 import { Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const FoodCards = () => {
+
+    const navigate = useNavigate()
+    const handleFoodCard = () => {
+        navigate('/fooddetails')
+    }
+
     return (
         <>
             <Card sx={{ width: '171px', height: '182px' }}>
-                <CardActionArea>
+                <CardActionArea onClick={handleFoodCard}>
                     <CardMedia
                         component="img"
                         height="110px"
