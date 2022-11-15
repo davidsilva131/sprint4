@@ -1,6 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllOrders from "../components/allorders/AllOrders";
 import FoodDetails from "../components/foodDetails/FoodDetails";
@@ -17,22 +18,43 @@ import Restaurant from "../components/restaurant/Restaurant";
 import Search from "../components/search/Search";
 import Verification from "../components/verification/Verification";
 import { auth } from "../firebase/firebaseConfig";
+import { userLoginSync } from "../redux/actions/userAction";
 import PrivateRouter from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
 
 const Router = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined)
     // const [check, setCheck] = useState(true)
+    const userStorage = useSelector((store) => store.user);
+    const dispatch = useDispatch()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            console.log(user.uid);
             if (user?.uid) {
                 setIsLoggedIn(true)
             } else {
                 setIsLoggedIn(false)
             }
             // setCheck(true)
+            if (Object.entries(userStorage).length === 0) {
+                const {
+                    displayName,
+                    email,
+                    accessToken,
+                    photoURL,
+                    uid
+                } = user.auth.currentUser;
+                dispatch(
+                    userLoginSync({
+                        name: displayName,
+                        email,
+                        accessToken,
+                        photoURL,
+                        uid,
+                        error: false,
+                    })
+                );
+            }
         })
     }, [setIsLoggedIn]);
 

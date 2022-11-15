@@ -46,8 +46,8 @@ export const userLoginAsync = (email, password) => {
                 const { displayName, accessToken, photoURL } = user.auth.currentUser;
                 dispatch(
                     userLoginSync({
-                        email,
                         name: displayName,
+                        email,
                         accessToken,
                         photoURL,
                         error: false
@@ -64,7 +64,7 @@ export const userLoginAsync = (email, password) => {
     }
 }
 
-const userLoginSync = (user) => {
+export const userLoginSync = (user) => {
     return {
         type: userTypes.LOGIN_USER,
         payload: { ...user }
