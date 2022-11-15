@@ -24,7 +24,7 @@ import PublicRouter from "./PublicRouter";
 
 const Router = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined)
-    // const [check, setCheck] = useState(true)
+    const [check, setCheck] = useState(true)
     const userStorage = useSelector((store) => store.user);
     const dispatch = useDispatch()
 
@@ -35,7 +35,7 @@ const Router = () => {
             } else {
                 setIsLoggedIn(false)
             }
-            // setCheck(true)
+            setCheck(false)
             if (Object.entries(userStorage).length === 0) {
                 const {
                     displayName,
@@ -56,15 +56,15 @@ const Router = () => {
                 );
             }
         })
-    }, [setIsLoggedIn]);
+    }, [isLoggedIn, check]);
 
-    // if (!check) {
-    //     return (
-    //         <Box sx={{ display: 'flex' }}>
-    //             <CircularProgress />
-    //         </Box>
-    //     )
-    // }
+    if (check) {
+        return (
+            <Box sx={{ display: 'flex' }}>
+                <CircularProgress />
+            </Box>
+        )
+    }
     return (
         <BrowserRouter>
             <Routes>
