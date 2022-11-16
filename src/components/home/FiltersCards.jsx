@@ -1,7 +1,7 @@
 import { CardActionArea } from "@mui/material";
 import React from "react";
 import './FiltersCards.scss'
-const FiltersCards = () => {
+const FiltersCards = ({ restaurantsCategory }) => {
   const cards = [
     {
       icon: null,
@@ -34,27 +34,23 @@ const FiltersCards = () => {
   ]
 
   const handleClickFilterCard = (text) => {
-    console.log(`da click a la card de ${text}`);
+    console.log(`da click a la card de ${text}`)
   }
 
   return (
     <>
       {
-
-        cards.map((card, index) =>
+        restaurantsCategory.map((category, index) =>
           <CardActionArea key={index}
-            onClick={() => { handleClickFilterCard(card.text) }}
+            onClick={() => { handleClickFilterCard(category) }}
             sx={{ width: '100px', height: '30px', borderRadius: '5px' }}>
             <aside className="filterCard">
-              <span>{card.icon}</span>
-              <span className="filterCard__text">{card.text}</span>
+              <span className="filterCard__text">{category}</span>
             </aside>
           </CardActionArea>
         )
       }
     </>
-
-
   )
 };
 

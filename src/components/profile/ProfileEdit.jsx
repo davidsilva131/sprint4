@@ -5,7 +5,9 @@ import { Avatar, InputAdornment } from "@mui/material";
 import { ColorButton, StyledEditInput } from "../styledComponents/MaterialComponents";
 import EditIcon from '@mui/icons-material/Edit';
 import GoBack from "../styledComponents/GoBack";
+import { useSelector } from "react-redux";
 const ProfileEdit = () => {
+    const userStorage = useSelector((store) => store.user);
 
     return (
         <Container>
@@ -16,7 +18,7 @@ const ProfileEdit = () => {
                         <span>Profile</span>
                     </div>
                     <section className="profileEdit__image">
-                        <Avatar sx={{ width: '64px', height: '64px', cursor: 'pointer' }} alt="photo" src="" />
+                        <Avatar sx={{ width: '64px', height: '64px', cursor: 'pointer' }} alt="user photo" src={userStorage.photoURL} />
                     </section>
                     <section className="profileEdit__inputs">
                         <StyledEditInput
@@ -27,6 +29,7 @@ const ProfileEdit = () => {
                                 justifyContent: 'center'
                             }}
                             fullWidth
+                            defaultValue={userStorage.name}
                             placeholder="name"
                             InputProps={{
                                 endAdornment: (
@@ -44,6 +47,7 @@ const ProfileEdit = () => {
                                 justifyContent: 'center'
                             }}
                             fullWidth
+                            defaultValue={userStorage.email}
                             placeholder="email"
                             InputProps={{
                                 endAdornment: (

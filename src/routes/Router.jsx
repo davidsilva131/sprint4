@@ -18,6 +18,7 @@ import Restaurant from "../components/restaurant/Restaurant";
 import Search from "../components/search/Search";
 import Verification from "../components/verification/Verification";
 import { auth } from "../firebase/firebaseConfig";
+import { getRestaurantsAsync } from "../redux/actions/restaurantsAction";
 import { userLoginSync } from "../redux/actions/userAction";
 import PrivateRouter from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
@@ -26,12 +27,14 @@ const Router = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined)
     const [check, setCheck] = useState(true)
     const userStorage = useSelector((store) => store.user);
+    const restaurantsStorage = useSelector((store) => store.restaurants);
     const dispatch = useDispatch()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user?.uid) {
                 setIsLoggedIn(true)
+                dispatch(getRestaurantsAsync())
             } else {
                 setIsLoggedIn(false)
             }
@@ -55,6 +58,8 @@ const Router = () => {
                     })
                 );
             }
+
+
         })
     }, [isLoggedIn, check]);
 
@@ -80,9 +85,9 @@ const Router = () => {
                         <Route path="profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
                         <Route path="allorders" element={<AllOrders />} />
                     </Route>
-                    <Route path="restaurant" element={<Restaurant />} />
+                    <Route path="restaurant/:name" element={<Restaurant />} />
                     <Route path="profileedit" element={<ProfileEdit />} />
-                    <Route path="fooddetails" element={<FoodDetails />} />
+                    <Route path="fooddetails/:name" element={<FoodDetails />} />
                     <Route path="payment" element={<Payment />} />
                     <Route path="addcard" element={<AddCard />} />
                 </Route>

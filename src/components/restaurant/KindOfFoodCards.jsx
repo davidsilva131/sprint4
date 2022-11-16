@@ -1,7 +1,8 @@
 import React from "react";
 import './KindOfFoodCards.scss'
-const KindOfFoodCards = () => {
-    const kindFood = ['All', 'Salates', 'Pizza', 'Soups', 'Pastas', 'Pastas', 'Pastas', 'Pastas', 'Pastas', 'Pastas', 'Pastas', 'Pastas', 'Pastas']
+const KindOfFoodCards = ({ menu }) => {
+    let kindFood = menu.map((food) => food.category)
+    kindFood = [...new Set(kindFood)]
     return (
         kindFood.map((food, index) =>
             <div key={index} className="filterFood">

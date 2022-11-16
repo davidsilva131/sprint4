@@ -11,14 +11,14 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import './Profile.scss'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogoutAsync } from "../../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ setIsLoggedIn }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
+    const userStorage = useSelector((store) => store.user);
     const onCloseSession = () => {
         dispatch(userLogoutAsync());
         setIsLoggedIn(false)
@@ -35,9 +35,9 @@ const Profile = ({ setIsLoggedIn }) => {
             <div className="profile">
                 <aside className="profile__image">
                     <div>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"
+                        <Avatar alt="Remy Sharp" src={userStorage.photoURL}
                             sx={{ width: '64px', height: '64px' }} />
-                        <span className="profile__name">Juan David Silva Contreras</span>
+                        <span className="profile__name">{userStorage.name}</span>
                     </div>
                 </aside>
                 <aside className="profile__options">
