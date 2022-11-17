@@ -14,7 +14,7 @@ import { VisibilityOff } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { userLoginAsync } from "../../redux/actions/userAction";
+import { loginProviderAsync, userLoginAsync } from "../../redux/actions/userAction";
 
 const Login = () => {
 
@@ -42,6 +42,14 @@ const Login = () => {
     }
     setSnack({ open: false, ...snack })
   };
+
+  const handleLoginGoogle = () => {
+    dispatch(loginProviderAsync('google'))
+  }
+
+  const handleLoginFacebook = () => {
+
+  }
 
   return (
     <Container>
@@ -95,8 +103,8 @@ const Login = () => {
         <div className="footer">
           <ColorButton type="submit" fullWidth>Login</ColorButton>
           <ButtonGroup variant="text" fullWidth>
-            <ColorButton fullWidth sx={{ gap: 2 }}><GoogleIcon />Login with Google</ColorButton>
-            <ColorButton fullWidth sx={{ gap: 2 }}><FacebookIcon />Login with Facebook</ColorButton>
+            <ColorButton onClick={handleLoginGoogle} fullWidth sx={{ gap: 2 }}><GoogleIcon />Login with Google</ColorButton>
+            <ColorButton onClick={handleLoginFacebook} fullWidth sx={{ gap: 2 }}><FacebookIcon />Login with Facebook</ColorButton>
           </ButtonGroup>
           <Link to="register">Create account</Link>
         </div>
