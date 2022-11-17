@@ -6,8 +6,9 @@ const RestaurantCard = ({ restaurants }) => {
 
     const navigate = useNavigate()
 
-    const handleClickRestaurant = ({ name }) => {
-        navigate(`/restaurant/${name}`)
+    const handleClickRestaurant = (restaurant) => {
+        console.log(restaurant);
+        navigate(`/restaurant/${restaurant.id}`)
     }
     return (
         <>

@@ -5,26 +5,29 @@ import './Restaurant.scss'
 import { Card, CardActionArea, CardContent, CardMedia, Rating } from "@mui/material";
 import KindOfFoodCards from "./KindOfFoodCards";
 import FoodCards from "./FoodCards";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getSpecificRestaurantAsync } from "../../redux/actions/restaurantsAction";
 const Restaurant = () => {
     const [restaurantInfo, setRestaurantInfo] = useState()
     const [menuFiltered, setMenuFiltered] = useState([])
-    const restaurantsStorage = useSelector((store) => store.restaurants);
     const { name } = useParams();
-    const restaurant = [];
+    const dispatch = useDispatch()
+    const restaurantsStorage = useSelector((store) => store.restaurants);
 
     useEffect(() => {
+        // if (name) {
+        //     dispatch(getSpecificRestaurantAsync(name))
+        // }
         getRestaurantInfo()
     }, []);
 
     const getRestaurantInfo = () => {
-        restaurantsStorage.restaurants.forEach(element => {
-            if (element.name === name) {
-                restaurant.push(element)
-            }
-        });
-        setRestaurantInfo(restaurant[0])
+        const tempRestaurants = restaurantsStorage.restaurants.slice()
+
+        const tempRestaurant = tempRestaurants.find(restaurant => restaurant.id === name)
+        console.log(tempRestaurant);
+        setRestaurantInfo(tempRestaurant)
     }
 
     return (
@@ -64,7 +67,7 @@ const Restaurant = () => {
                             </section>
                         </section>
                     </Container>
-                ) : (<></>)
+                ) : (<div>No</div>)
 
             }
         </>
