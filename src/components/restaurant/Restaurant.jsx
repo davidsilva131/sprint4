@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 const Restaurant = () => {
     const [restaurantInfo, setRestaurantInfo] = useState()
+    const [menuFiltered, setMenuFiltered] = useState([])
     const restaurantsStorage = useSelector((store) => store.restaurants);
     const { name } = useParams();
     const restaurant = [];
@@ -47,10 +48,19 @@ const Restaurant = () => {
                                 </div>
                             </aside>
                             <aside className="restaurant__filter">
-                                <KindOfFoodCards menu={restaurantInfo.menu} />
+                                <KindOfFoodCards menu={restaurantInfo.menu} setMenuFiltered={setMenuFiltered} />
                             </aside>
                             <section className="restaurant__food">
-                                <FoodCards menu={restaurantInfo.menu} />
+                                {
+                                    menuFiltered.length ?
+                                        (
+                                            <FoodCards menu={menuFiltered} />
+
+                                        ) :
+                                        (
+                                            <FoodCards menu={restaurantInfo.menu} />
+                                        )
+                                }
                             </section>
                         </section>
                     </Container>
