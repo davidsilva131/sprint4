@@ -48,7 +48,7 @@ const Login = () => {
   }
 
   const handleLoginFacebook = () => {
-
+    dispatch(loginProviderAsync('facebook'))
   }
 
   return (
