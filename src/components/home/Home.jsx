@@ -33,7 +33,7 @@ export const Home = () => {
                     <Carousel />
                 </div>
                 <section className="home__filters">
-                    <FiltersCards restaurants={restaurants} setRestaurantsFiltered={setRestaurantsFiltered} restaurantsFiltered={restaurantsFiltered} restaurantsCategory={restaurantsCategory} />
+                    <FiltersCards restaurants={restaurants} setRestaurantsFiltered={setRestaurantsFiltered} restaurantsCategory={restaurantsCategory} />
                 </section>
                 <section className="home__restaurants">
                     {

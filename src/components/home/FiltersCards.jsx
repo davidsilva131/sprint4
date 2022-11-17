@@ -1,7 +1,7 @@
 import { CardActionArea } from "@mui/material";
 import React from "react";
 import './FiltersCards.scss'
-const FiltersCards = ({ restaurants, setRestaurantsFiltered, restaurantsFiltered, restaurantsCategory }) => {
+const FiltersCards = ({ restaurants, setRestaurantsFiltered, restaurantsCategory }) => {
 
   const handleClickFilterCard = (text) => {
     let tempRestaurants = restaurants.slice()
