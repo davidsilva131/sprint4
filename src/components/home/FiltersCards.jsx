@@ -1,40 +1,13 @@
 import { CardActionArea } from "@mui/material";
 import React from "react";
 import './FiltersCards.scss'
-const FiltersCards = ({ restaurantsCategory }) => {
-  const cards = [
-    {
-      icon: null,
-      text: 'All'
-    },
-    {
-      icon: '🍕',
-      text: 'Pizza'
-    },
-    {
-      icon: '🍔',
-      text: 'Fast food'
-    },
-    {
-      icon: '🥗',
-      text: 'Vegetarian'
-    },
-    {
-      icon: '🍣',
-      text: 'Sushi'
-    },
-    {
-      icon: '🍝',
-      text: 'Italian'
-    },
-    {
-      icon: '🌯',
-      text: 'Mexican'
-    }
-  ]
+const FiltersCards = ({ restaurants, setRestaurantsFiltered, restaurantsFiltered, restaurantsCategory }) => {
 
   const handleClickFilterCard = (text) => {
-    console.log(`da click a la card de ${text}`)
+    let tempRestaurants = restaurants.slice()
+    tempRestaurants = tempRestaurants.filter(restaurant => restaurant.category === text)
+    setRestaurantsFiltered(tempRestaurants)
+    console.log(tempRestaurants);
   }
 
   return (

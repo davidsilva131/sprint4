@@ -1,5 +1,5 @@
 import { Box, Container } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './Home.scss'
 import { PersonalLocation } from "../styledComponents/MaterialComponents";
 import { Carousel } from "../styledComponents/Carousel";
@@ -10,11 +10,13 @@ import { getRestaurantsAsync } from "../../redux/actions/restaurantsAction";
 
 export const Home = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
+    const [restaurantsFiltered, setRestaurantsFiltered] = useState([])
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     dispatch(getRestaurantsAsync())
-    // }, []);
+    useEffect(() => {
+        setRestaurantsFiltered(restaurants)
+    }, []);
+
 
     const restaurantsCategory = restaurants.map((element) => element.category)
     return (
@@ -31,10 +33,14 @@ export const Home = () => {
                     <Carousel />
                 </div>
                 <section className="home__filters">
-                    <FiltersCards restaurantsCategory={restaurantsCategory} />
+                    <FiltersCards restaurants={restaurants} setRestaurantsFiltered={setRestaurantsFiltered} restaurantsFiltered={restaurantsFiltered} restaurantsCategory={restaurantsCategory} />
                 </section>
                 <section className="home__restaurants">
-                    <RestaurantCard restaurants={restaurants} />
+                    {
+                        restaurantsFiltered.length ? (
+                            <RestaurantCard restaurants={restaurantsFiltered} />
+                        ) : (<RestaurantCard restaurants={restaurants} />)
+                    }
                 </section>
             </Container>
         </div>
