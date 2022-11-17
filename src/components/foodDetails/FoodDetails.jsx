@@ -13,6 +13,7 @@ const FoodDetails = () => {
   const { name } = useParams();
   const restaurantsStorage = useSelector((store) => store.restaurants);
   const [foodInfo, setFoodInfo] = useState()
+  const [foodPrice, setFoodPrice] = useState()
 
   useEffect(() => {
     getFoodInfo()
@@ -23,6 +24,7 @@ const FoodDetails = () => {
     tempFood = tempFood.map(element => element.find(food => food.name === name))
     console.log(tempFood[0]);
     setFoodInfo(tempFood[0])
+    setFoodPrice(tempFood[0].price)
   }
 
   const handleLess = () => {
@@ -33,6 +35,10 @@ const FoodDetails = () => {
 
   const handlePlus = () => {
     setCounter(counter + 1)
+  }
+
+  const getPrice = () => {
+    return counter * foodPrice
   }
 
   return (
@@ -68,7 +74,7 @@ const FoodDetails = () => {
                   </aside>
                   <ColorButton sx={{ width: '209px', display: 'flex', justifyContent: 'space-between' }}>
                     <span>Add</span>
-                    <span>$14.05</span>
+                    <span>$ {getPrice()}</span>
                   </ColorButton>
                 </section>
               </div>
