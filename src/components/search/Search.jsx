@@ -6,17 +6,21 @@ import BackSearch from '@mui/icons-material/SettingsBackupRestoreTwoTone';
 import { useSelector } from "react-redux";
 import { CardActionArea } from "@mui/material";
 import notFoundLogo from "../../images/NotFound.png"
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
     const [allFood, setAllFood] = useState([])
     const [foodFiltered, setFoodFiltered] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         const tempFood = restaurants.map((restaurant) => restaurant.menu)
         setAllFood(tempFood)
     }, [restaurants]);
 
+    const handleFoodCard = (name) => {
+        navigate(`/fooddetails/${name}`)
+    }
     return (
         <Container>
             <div className="search">
@@ -29,7 +33,7 @@ const Search = () => {
                     {foodFiltered.length
                         ? (
                             foodFiltered.map((food, index) =>
-                                <CardActionArea key={index}>
+                                <CardActionArea onClick={() => { handleFoodCard(food.name) }} key={index}>
                                     <aside className="search__card">
                                         <img src={food.image} alt="" />
                                         <div className="search__card__content">
