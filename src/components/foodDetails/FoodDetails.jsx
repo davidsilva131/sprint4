@@ -22,7 +22,6 @@ const FoodDetails = () => {
   const getFoodInfo = () => {
     let tempFood = restaurantsStorage.restaurants.map((element) => element.menu)
     tempFood = tempFood.map(element => element.find(food => food.name === name))
-    console.log(tempFood[0]);
     setFoodInfo(tempFood[0])
     setFoodPrice(tempFood[0].price)
   }

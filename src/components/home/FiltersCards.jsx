@@ -7,7 +7,6 @@ const FiltersCards = ({ restaurants, setRestaurantsFiltered, restaurantsCategory
     let tempRestaurants = restaurants.slice()
     tempRestaurants = tempRestaurants.filter(restaurant => restaurant.category === text)
     setRestaurantsFiltered(tempRestaurants)
-    console.log(tempRestaurants);
   }
 
   return (

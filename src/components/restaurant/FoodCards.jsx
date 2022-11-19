@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const FoodCards = ({ menu }) => {
 
     const navigate = useNavigate()
-    console.log(menu);
     const handleFoodCard = (name) => {
         navigate(`/fooddetails/${name}`)
     }

@@ -26,7 +26,6 @@ const Restaurant = () => {
         const tempRestaurants = restaurantsStorage.restaurants.slice()
 
         const tempRestaurant = tempRestaurants.find(restaurant => restaurant.id === name)
-        console.log(tempRestaurant);
         setRestaurantInfo(tempRestaurant)
     }
 

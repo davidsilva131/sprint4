@@ -19,6 +19,7 @@ const Profile = ({ setIsLoggedIn }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const userStorage = useSelector((store) => store.user);
+
     const onCloseSession = () => {
         dispatch(userLogoutAsync());
         setIsLoggedIn(false)
