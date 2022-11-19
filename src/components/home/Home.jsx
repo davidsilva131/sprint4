@@ -1,4 +1,4 @@
-import { Box, Container } from "@mui/system";
+import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import './Home.scss'
 import { PersonalLocation } from "../styledComponents/MaterialComponents";
@@ -6,7 +6,6 @@ import { Carousel } from "../styledComponents/Carousel";
 import RestaurantCard from "./RestaurantCard";
 import FiltersCards from "./FiltersCards";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurantsAsync } from "../../redux/actions/restaurantsAction";
 
 export const Home = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
@@ -18,7 +17,8 @@ export const Home = () => {
     }, []);
 
 
-    const restaurantsCategory = restaurants.map((element) => element.category)
+    let restaurantsCategory = restaurants.map((element) => element.category)
+    restaurantsCategory = [...new Set(restaurantsCategory)]
     return (
         <div className="home">
             <Container>
