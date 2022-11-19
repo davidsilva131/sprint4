@@ -1,9 +1,7 @@
 import { restaurantsTypes } from "../types/restaurantsTypes";
 
 const initialState = {
-    restaurants: [],
-    restaurant: {},
-    food: {}
+    restaurants: []
 }
 
 export const restaurantsReducer = (state = initialState, action) => {
