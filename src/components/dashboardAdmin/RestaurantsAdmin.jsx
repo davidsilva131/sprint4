@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardMedia } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -26,13 +26,20 @@ const RestaurantsAdmin = () => {
                 <ColorButton onClick={handleAddRestaurant} sx={{ width: '100px', height: '100px' }}>Add Restaurant</ColorButton>
                 {
                     restaurants.map((restaurant, index) =>
-                        <Card key={index} sx={{ maxWidth: 345, height: 200 }}>
+                        <Card key={index} sx={{ maxWidth: 345, height: 300 }}>
                             <CardMedia
                                 component="img"
                                 alt={restaurant.name}
                                 height="140"
                                 image={restaurant.image}
                             />
+                            <CardContent>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                                    <span>{restaurant.name}</span>
+                                    <span>{restaurant.category}</span>
+                                    <span>Before you: ${restaurant.beforeYou}</span>
+                                </div>
+                            </CardContent>
                             <CardActions>
                                 <Button onClick={() => { handleOpen('Edit', restaurant) }} size="small">Edit</Button>
                                 <Button onClick={() => { handleOpen('Delete', restaurant) }} size="small">Delete</Button>

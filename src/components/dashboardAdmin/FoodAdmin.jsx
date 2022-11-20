@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardMedia } from "@mui/material";
+import { Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -33,16 +33,23 @@ const FoodAdmin = () => {
                     <main className="admin__main">
                         <aside className="admin__main__container">
                             <div className="admin__food">
-                                <ColorButton onClick={handleAddFood}>Add Food</ColorButton>
+                                <ColorButton sx={{ height: '100px' }} onClick={handleAddFood}>Add Food</ColorButton>
                                 {
                                     foodState.map((food, index) =>
-                                        <Card key={index} sx={{ width: 345, height: 200 }}>
+                                        <Card key={index} sx={{ width: 345 }}>
                                             <CardMedia
                                                 component="img"
                                                 alt={food.name}
                                                 height="140"
                                                 image={food.image}
                                             />
+                                            <CardContent>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                                                    <span>{food.name}</span>
+                                                    <span>{food.description}</span>
+                                                    <span>$ {food.price}</span>
+                                                </div>
+                                            </CardContent>
                                             <CardActions>
                                                 <Button onClick={() => { handleOpen('Edit', food) }} size="small">Edit</Button>
                                                 <Button onClick={() => { handleOpen('Delete', food) }} size="small">Delete</Button>
