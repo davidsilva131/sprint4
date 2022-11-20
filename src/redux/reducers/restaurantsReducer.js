@@ -12,6 +12,8 @@ export const restaurantsReducer = (state = initialState, action) => {
             return { ...state, restaurant: action.payload.restaurant }
         case restaurantsTypes.ADD_RESTAURANT:
             return { ...state, restaurants: [...action.payload] }
+        case restaurantsTypes.ADD_FOOD:
+            return action.payload;
         default:
             return state
     }

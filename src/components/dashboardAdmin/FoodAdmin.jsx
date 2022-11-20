@@ -2,12 +2,13 @@ import { Button, Card, CardActions, CardMedia } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ColorButton } from "../styledComponents/MaterialComponents";
 import './DashboardAdmin.scss'
 const FoodAdmin = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
     const [foodState, setFoodState] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         let FOOD = []
         let allFood = restaurants.map(restaurant => restaurant.menu)
@@ -21,6 +22,10 @@ const FoodAdmin = () => {
         console.log(`${text} ${food.name}`);
     }
 
+    const handleAddFood = () => {
+        navigate('/addfood')
+    }
+
     return (
         <Container>
             <section className="admFood">
@@ -28,7 +33,7 @@ const FoodAdmin = () => {
                     <main className="admin__main">
                         <aside className="admin__main__container">
                             <div className="admin__food">
-                                <ColorButton>Add Food</ColorButton>
+                                <ColorButton onClick={handleAddFood}>Add Food</ColorButton>
                                 {
                                     foodState.map((food, index) =>
                                         <Card key={index} sx={{ width: 345, height: 200 }}>
