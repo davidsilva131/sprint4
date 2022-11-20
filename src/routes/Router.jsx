@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllOrders from "../components/allorders/AllOrders";
+import AddRestaurant from "../components/dashboardAdmin/AddRestaurant";
 import DashboardAdmin from "../components/dashboardAdmin/DashboardAdmin";
 import FoodAdmin from "../components/dashboardAdmin/FoodAdmin";
 import FoodDetails from "../components/foodDetails/FoodDetails";
@@ -85,6 +86,7 @@ const Router = () => {
                                 <Route element={<AdminLayout setIsLoggedIn={setIsLoggedIn} />}>
                                     <Route path="home" element={<DashboardAdmin />} />
                                     <Route path="adminfood" element={<FoodAdmin />}></Route>
+                                    <Route path="addrestaurant" element={<AddRestaurant />}></Route>
                                 </Route>
                             </Route>
                         ) :
