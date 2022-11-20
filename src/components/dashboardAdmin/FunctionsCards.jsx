@@ -1,10 +1,25 @@
 import { Chip } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './FunctionsCards.scss'
-const FunctionsCards = ({ setFunctionSelected }) => {
+const FunctionsCards = () => {
     const functions = ['Restaurants', 'Food', 'Orders']
+    const navigate = useNavigate()
+
     const handleClickFunction = (text) => {
-        setFunctionSelected(text)
+        switch (text) {
+            case 'Restaurants':
+                navigate('home')
+                break;
+            case 'Food':
+                navigate('adminfood')
+                break;
+            case 'Orders':
+                navigate('adminorders')
+                break;
+            default:
+                break;
+        }
     }
     return (
         <>

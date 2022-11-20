@@ -4,7 +4,7 @@
     margin: 20px 0 20px 0;
     gap: 20px;
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh - 170px);
     &__header{
         display: flex;
         justify-content: space-between;
@@ -21,5 +21,11 @@
             width: 100%;
             overflow: auto;
         }
+    }
+    &__food{
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 }

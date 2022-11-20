@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllOrders from "../components/allorders/AllOrders";
 import DashboardAdmin from "../components/dashboardAdmin/DashboardAdmin";
+import FoodAdmin from "../components/dashboardAdmin/FoodAdmin";
 import FoodDetails from "../components/foodDetails/FoodDetails";
 import { Home } from "../components/home/Home";
+import AdminLayout from "../components/layout/AdminLayout";
 import NavBar from "../components/layout/NavBar";
 import Login from "../components/login/Login";
 import NoMatch from "../components/nomatch/NoMatch";
@@ -80,7 +82,10 @@ const Router = () => {
                     admin ?
                         (
                             <Route element={<PrivateRouter isAuthentication={isLoggedIn} />}>
-                                <Route path="home" element={<DashboardAdmin setIsLoggedIn={setIsLoggedIn} />} />
+                                <Route element={<AdminLayout setIsLoggedIn={setIsLoggedIn} />}>
+                                    <Route path="home" element={<DashboardAdmin />} />
+                                    <Route path="adminfood" element={<FoodAdmin />}></Route>
+                                </Route>
                             </Route>
                         ) :
                         (
