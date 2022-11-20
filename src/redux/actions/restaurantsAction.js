@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { database } from "../../firebase/firebaseConfig";
 import { restaurantsTypes } from "../types/restaurantsTypes";
 
@@ -57,5 +57,25 @@ export const getSpecificRestaurantSync = (restaurant) => {
         payload: {
             restaurant,
         }
+    }
+}
+
+export const addNewRestaurantAsync = (restaurant) => {
+    return async (dispatch) => {
+        try {
+            const restaurantsCollection = collection(database, collectionName);
+            const docs = await addDoc(restaurantsCollection, restaurant);
+            dispatch(addNewRestaurantSync({ id: docs.id, ...restaurant }));
+        } catch (error) {
+            console.log(error);
+            dispatch(addNewRestaurantSync({}));
+        }
+    }
+}
+
+const addNewRestaurantSync = (restaurant) => {
+    return {
+        type: restaurantsTypes.ADD_RESTAURANT,
+        payload: restaurant
     }
 }

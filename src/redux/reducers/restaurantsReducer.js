@@ -10,6 +10,8 @@ export const restaurantsReducer = (state = initialState, action) => {
             return { ...state, restaurants: [...action.payload] }
         case restaurantsTypes.GET_SPECIFIC_RESTAURANT:
             return { ...state, restaurant: action.payload.restaurant }
+        case restaurantsTypes.ADD_RESTAURANT:
+            return { ...state, restaurants: [...action.payload] }
         default:
             return state
     }

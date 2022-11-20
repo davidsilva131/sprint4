@@ -2,12 +2,35 @@ import { Container } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
+import { fileUpLoad } from '../../services/fileUpload'
+import { useDispatch } from "react-redux";
+import { addNewRestaurantAsync } from "../../redux/actions/restaurantsAction";
 
 const AddRestaurant = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
+    const dispatch = useDispatch()
+    const onUploadImage = async (image) => {
+        const url = await fileUpLoad(image);
+        if (url) {
+            return url;
+        }
+    }
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const photoUrl = await onUploadImage(data.image[0])
+        const stars = parseInt(data.stars)
+        const beforeYou = parseInt(data.beforeYou)
+        const newRestaurant = {
+            name: data.name,
+            category: data.category,
+            description: data.description,
+            workTime: data.workTime,
+            beforeYou: beforeYou,
+            stars: stars,
+            image: photoUrl,
+            menu: []
+        }
+        dispatch(addNewRestaurantAsync(newRestaurant))
     }
     return (
         <Container>
@@ -48,6 +71,7 @@ const AddRestaurant = () => {
                     />
                     <CssTextField
                         type='number'
+                        inputProps={{ inputMode: 'numeric' }}
                         label="Before You"
                         variant="standard"
                         {...register("beforeYou", { required: "Restaurant before you required" })}
@@ -57,6 +81,7 @@ const AddRestaurant = () => {
                     <CssTextField
                         type='number'
                         label="Stars"
+                        inputProps={{ inputMode: 'numeric' }}
                         variant="standard"
                         {...register("stars", { required: "Restaurant stars required" })}
                         error={!!errors?.stars}
