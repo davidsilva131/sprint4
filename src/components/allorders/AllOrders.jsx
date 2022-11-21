@@ -6,12 +6,15 @@ import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrdersAsync } from "../../redux/actions/allOrdersAction";
 import GoBack from "../styledComponents/GoBack";
+import { useNavigate } from "react-router-dom";
 
 const AllOrders = () => {
     const dispatch = useDispatch()
     const { uid } = useSelector(store => store.user)
     const { restaurants } = useSelector(store => store.restaurants)
     const orders = useSelector(store => store.allOrders)
+    const navigate = useNavigate()
+
     useEffect(() => {
         dispatch(getOrdersAsync(uid))
     }, []);
@@ -25,6 +28,10 @@ const AllOrders = () => {
         const { name } = restaurants.find(restaurant => restaurant.id === order.restaurant)
         return name
     }
+
+    const handleOrder = (id) => {
+        navigate(`/orderdetail/${id}`)
+    }
     return (
         <Container>
             <div className="allOrders">
@@ -35,7 +42,7 @@ const AllOrders = () => {
                 <section className="allOrders__orders">
                     {
                         orders.map((order, index) =>
-                            <CardActionArea key={index}>
+                            <CardActionArea onClick={() => { handleOrder(order.id) }} key={index}>
                                 <aside className="allOrders__orders__card">
                                     <div className="allOrders__orders__card__left">
                                         <img src={getRestaurantImage(order)} alt="restaurant logo" />

@@ -41,7 +41,8 @@ const Delivery = () => {
             address: data.address,
             aditionalIngredients: food.aditionalIngredients,
             user: user.uid,
-            restaurant: restaurantId
+            restaurant: restaurantId,
+            quantity: food.quantity
         }
         dispatch(newOrderAsync(newOrder))
         navigate('/orderacepted')

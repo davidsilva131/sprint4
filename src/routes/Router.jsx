@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllOrders from "../components/allorders/AllOrders";
+import OrderDetail from "../components/allorders/OrderDetail";
 import AddFood from "../components/dashboardAdmin/AddFood";
 import AddRestaurant from "../components/dashboardAdmin/AddRestaurant";
 import DashboardAdmin from "../components/dashboardAdmin/DashboardAdmin";
@@ -101,6 +102,7 @@ const Router = () => {
                                     <Route path="search" element={<Search />} />
                                     <Route path="profile" element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
                                     <Route path="allorders" element={<AllOrders />} />
+                                    <Route path="orderdetail/:id" element={<OrderDetail />} />
                                 </Route>
                                 <Route path="restaurant/:name" element={<Restaurant />} />
                                 <Route path="profileedit" element={<ProfileEdit />} />
