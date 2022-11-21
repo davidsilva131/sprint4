@@ -8,6 +8,7 @@ import AddFood from "../components/dashboardAdmin/AddFood";
 import AddRestaurant from "../components/dashboardAdmin/AddRestaurant";
 import DashboardAdmin from "../components/dashboardAdmin/DashboardAdmin";
 import FoodAdmin from "../components/dashboardAdmin/FoodAdmin";
+import Delivery from "../components/delivery/Delivery";
 import FoodDetails from "../components/foodDetails/FoodDetails";
 import { Home } from "../components/home/Home";
 import AdminLayout from "../components/layout/AdminLayout";
@@ -105,6 +106,7 @@ const Router = () => {
                                 <Route path="fooddetails/:name" element={<FoodDetails />} />
                                 <Route path="payment" element={<Payment />} />
                                 <Route path="addcard" element={<AddCard />} />
+                                <Route path="delivery" element={<Delivery />} />
                             </Route>
                         )
                 }

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ColorButton } from "../styledComponents/MaterialComponents";
 import './FoodDetails.scss'
 import GoBack from "../styledComponents/GoBack";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setActualOrder } from "../../redux/actions/orderAction";
 const FoodDetails = () => {
@@ -71,7 +71,7 @@ const FoodDetails = () => {
       })
     }
   }
-
+  const navigate = useNavigate();
   const handleOrder = () => {
     let tempOrder = {
       name: order.name,
@@ -81,6 +81,7 @@ const FoodDetails = () => {
       quantity: counter
     }
     dispatch(setActualOrder(tempOrder))
+    navigate('/delivery')
   }
 
   return (

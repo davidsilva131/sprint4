@@ -1,0 +1,76 @@
+.delivery{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    gap: 20px;
+    &__head{
+        display: flex;
+        justify-content: space-between;
+        width: 55%;
+        height: 41px;
+        gap: 20px;
+    }
+    &__address{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 20px;
+    }
+    &__payment{
+        display: flex;
+        flex-direction: column;
+    }
+    &__food{
+        display: flex;
+        flex-direction: column;
+        &__card{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                object-fit: cover;
+            }
+           
+        }
+    }
+    &__note{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__price{
+        display: flex;
+        flex-direction: column;
+        &__subtotal{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 1px solid gray;
+            padding-bottom: 5px;
+            aside{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        &__total{
+            margin-top: 10px;
+            aside{
+                display: flex;
+                justify-content: space-between;
+            }
+            &__price{
+                font-size: 20px;
+            }
+        }
+    }
+}
