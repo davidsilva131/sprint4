@@ -10,6 +10,7 @@ import './Delivery.scss'
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { newOrderAsync } from "../../redux/actions/allOrdersAction";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Delivery = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -20,7 +21,7 @@ const Delivery = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
     const deliveryPrice = 5000;
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const handleChange = ({ target }) => {
         setPayment(target.value)
     }
@@ -43,6 +44,7 @@ const Delivery = () => {
             restaurant: restaurantId
         }
         dispatch(newOrderAsync(newOrder))
+        navigate('/orderacepted')
     }
 
     const getRestaurant = (name) => {

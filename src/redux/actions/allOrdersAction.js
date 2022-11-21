@@ -1,5 +1,5 @@
 import { async } from "@firebase/util";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { database } from "../../firebase/firebaseConfig";
 import { allOrdersTypes } from '../types/allOrdersTypes'
 
@@ -7,20 +7,24 @@ const collectionName = 'orders'
 const ordersCollection = collection(database, collectionName);
 
 export const getOrdersAsync = (user) => {
-    return (dispatch) => {
-        const docRef = doc(database, collectionName, user);
-        getDoc(docRef)
-            .then(docSnapshot => {
-                if (docSnapshot.exists()) {
-                    dispatch(getOrdersSync(docSnapshot.data()))
-                } else {
-                    console.log('No such document!')
+    return async (dispatch) => {
+        const querySnapshot = await getDocs(ordersCollection)
+        const orders = []
+        try {
+            querySnapshot.forEach(element => {
+                if (element.data().user === user) {
+                    const order = {
+                        id: element.id,
+                        ...element.data()
+                    }
+                    orders.push(order)
                 }
             })
-            .catch(error => {
-                dispatch(getOrdersSync([]))
-            })
+        } catch (error) {
 
+        } finally {
+            dispatch(getOrdersSync(orders))
+        }
     }
 }
 

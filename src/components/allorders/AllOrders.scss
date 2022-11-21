@@ -4,9 +4,10 @@
     width: 100%;
     height: calc(100vh - 80px);
     &__tittle{
+        margin-top: 50px;
         display: flex;
-        justify-content: center;
-        width: 100%;
+        justify-content: space-between;
+        width: 55%;
         h1{
            font-size: 15px; 
            font-weight: 400;

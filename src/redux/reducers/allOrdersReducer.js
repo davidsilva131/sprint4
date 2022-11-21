@@ -5,7 +5,7 @@ export const allOrdersReducer = (state = [], action) => {
         case allOrdersTypes.GET_ORDERS:
             return [...action.payload]
         case allOrdersTypes.NEW_ORDER:
-            return action.payload
+            return [...state, action.payload]
         default:
             return state
     }

@@ -1,47 +1,56 @@
 import { Container } from "@mui/system";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import React from "react";
+import React, { useEffect } from "react";
 import './AllOrders.scss'
-import logo from '../../images/ParedesLogo.png'
 import { CardActionArea } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrdersAsync } from "../../redux/actions/allOrdersAction";
+import GoBack from "../styledComponents/GoBack";
 
 const AllOrders = () => {
+    const dispatch = useDispatch()
+    const { uid } = useSelector(store => store.user)
+    const { restaurants } = useSelector(store => store.restaurants)
+    const orders = useSelector(store => store.allOrders)
+    useEffect(() => {
+        dispatch(getOrdersAsync(uid))
+    }, []);
+
+    const getRestaurantImage = (order) => {
+        const { image } = restaurants.find(restaurant => restaurant.id === order.restaurant)
+        return image
+    }
+
+    const getRestaurantName = (order) => {
+        const { name } = restaurants.find(restaurant => restaurant.id === order.restaurant)
+        return name
+    }
     return (
         <Container>
             <div className="allOrders">
                 <section className="allOrders__tittle">
-                    <h1>All Orders</h1>
+                    <GoBack />
+                    <span>All Orders</span>
                 </section>
                 <section className="allOrders__orders">
-                    <CardActionArea>
-                        <aside className="allOrders__orders__card">
-                            <div className="allOrders__orders__card__left">
-                                <img src={logo} alt="restaurant logo" />
-                                <div className="allOrders__orders__card__left__restaurant">
-                                    <span className="allOrders__orders__card__left__name">Pardes restaurant</span>
-                                    <span className="allOrders__orders__card__left__price">$ 132.00</span>
-                                </div>
-                            </div>
-                            <div className="allOrders__orders__card__right">
-                                <span className="allOrders__orders__card__right__state delivered">Delivered <ArrowForwardIosIcon sx={{ width: '10px' }} /></span>
-                            </div>
-                        </aside>
-                    </CardActionArea>
-                    <CardActionArea>
-                        <aside className="allOrders__orders__card">
-                            <div className="allOrders__orders__card__left">
-                                <img src={logo} alt="restaurant logo" />
-                                <div className="allOrders__orders__card__left__restaurant">
-                                    <span className="allOrders__orders__card__left__name">Pardes restaurant</span>
-                                    <span className="allOrders__orders__card__left__price">$ 132.00</span>
-                                </div>
-                            </div>
-                            <div className="allOrders__orders__card__right">
-                                <span className="allOrders__orders__card__right__state canceled">Canceled <ArrowForwardIosIcon sx={{ width: '10px' }} /></span>
-                            </div>
-                        </aside>
-                    </CardActionArea>
-
+                    {
+                        orders.map((order, index) =>
+                            <CardActionArea key={index}>
+                                <aside className="allOrders__orders__card">
+                                    <div className="allOrders__orders__card__left">
+                                        <img src={getRestaurantImage(order)} alt="restaurant logo" />
+                                        <div className="allOrders__orders__card__left__restaurant">
+                                            <span className="allOrders__orders__card__left__name">{getRestaurantName(order)}</span>
+                                            <span className="allOrders__orders__card__left__price">$ {order.total}</span>
+                                        </div>
+                                    </div>
+                                    <div className="allOrders__orders__card__right">
+                                        <span className="allOrders__orders__card__right__state delivered">Delivered <ArrowForwardIosIcon sx={{ width: '10px' }} /></span>
+                                    </div>
+                                </aside>
+                            </CardActionArea>
+                        )
+                    }
                 </section>
             </div>
         </Container>
