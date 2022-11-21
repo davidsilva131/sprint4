@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
 import { fileUpLoad } from '../../services/fileUpload'
 import { useDispatch } from "react-redux";
-import { addNewRestaurantAsync } from "../../redux/actions/restaurantsAction";
+import { addNewRestaurantAsync, getRestaurantsAsync } from "../../redux/actions/restaurantsAction";
+import Swal from "sweetalert2";
 
 const AddRestaurant = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -31,6 +32,14 @@ const AddRestaurant = () => {
             menu: []
         }
         dispatch(addNewRestaurantAsync(newRestaurant))
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'New reataurant added',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        dispatch(getRestaurantsAsync())
     }
     return (
         <Container>

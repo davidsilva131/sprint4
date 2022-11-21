@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, deleteDoc } from "firebase/firestore";
 import { database } from "../../firebase/firebaseConfig";
 import { restaurantsTypes } from "../types/restaurantsTypes";
 
@@ -98,5 +98,30 @@ const addNewFoodSync = (food) => {
     return {
         type: restaurantsTypes.ADD_FOOD,
         payload: food
+    }
+}
+
+export const updateRestaurantAsync = (restaurant, id) => {
+    return async (dispatch) => {
+        try {
+            const restaurantRef = doc(database, collectionName, id)
+            const docs = await updateDoc(restaurantRef, {
+                ...restaurant
+            })
+        } catch (error) {
+            console.log(error)
+            dispatch()
+        }
+    }
+}
+
+export const deleteRestaurantAsync = (id) => {
+    return async (dispatch) => {
+        try {
+            await deleteDoc(doc(database, collectionName, id))
+        } catch (error) {
+            console.log(error)
+            dispatch()
+        }
     }
 }

@@ -1,20 +1,45 @@
 import { Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
+import Swal from 'sweetalert2'
 import './RestaurantsAdmin.scss'
+import { deleteRestaurantAsync, getRestaurantsAsync } from "../../redux/actions/restaurantsAction";
 const RestaurantsAdmin = () => {
     const { restaurants } = useSelector((store) => store.restaurants)
-    const [restaurantSelected, setRestaurantSelected] = useState()
     const navigate = useNavigate()
-    useEffect(() => {
-        console.log(restaurantSelected);
-    }, [restaurantSelected]);
+    const dispatch = useDispatch()
 
-    const handleOpen = (action, restaurant) => {
-        setRestaurantSelected()
-        setRestaurantSelected(restaurant)
+    const handleOpen = (action, id) => {
+        switch (action) {
+            case 'Edit':
+                navigate(`/editrestaurant/${id}`)
+                break;
+            case 'Delete':
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        dispatch(deleteRestaurantAsync(id))
+                        dispatch(getRestaurantsAsync())
+                        Swal.fire(
+                            'Deleted!',
+                            'Your restaurant has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+                break;
+            default:
+                break;
+        }
     };
 
     const handleAddRestaurant = () => {
@@ -41,20 +66,10 @@ const RestaurantsAdmin = () => {
                                 </div>
                             </CardContent>
                             <CardActions>
-                                <Button onClick={() => { handleOpen('Edit', restaurant) }} size="small">Edit</Button>
-                                <Button onClick={() => { handleOpen('Delete', restaurant) }} size="small">Delete</Button>
+                                <Button onClick={() => { handleOpen('Edit', restaurant.id) }} size="small">Edit</Button>
+                                <Button onClick={() => { handleOpen('Delete', restaurant.id) }} size="small">Delete</Button>
                             </CardActions>
                         </Card>
-                    )
-                }
-                {
-                    restaurantSelected
-                    && (
-                        <CssTextField
-                            defaultValue={restaurantSelected.name}
-                            label="Name"
-
-                        />
                     )
                 }
 
