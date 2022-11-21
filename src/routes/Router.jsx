@@ -9,6 +9,7 @@ import AddFood from "../components/dashboardAdmin/AddFood";
 import AddRestaurant from "../components/dashboardAdmin/AddRestaurant";
 import DashboardAdmin from "../components/dashboardAdmin/DashboardAdmin";
 import FoodAdmin from "../components/dashboardAdmin/FoodAdmin";
+import OrdersAdmin from "../components/dashboardAdmin/OrdersAdmin";
 import Delivery from "../components/delivery/Delivery";
 import OrderAcepted from "../components/delivery/OrderAcepted";
 import FoodDetails from "../components/foodDetails/FoodDetails";
@@ -92,6 +93,7 @@ const Router = () => {
                                     <Route path="adminfood" element={<FoodAdmin />}></Route>
                                     <Route path="addrestaurant" element={<AddRestaurant />}></Route>
                                     <Route path="addfood" element={<AddFood />}></Route>
+                                    <Route path="adminorders" element={<OrdersAdmin />} />
                                 </Route>
                             </Route>
                         ) :

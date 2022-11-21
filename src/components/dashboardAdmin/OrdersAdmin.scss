@@ -1,0 +1,12 @@
+.admorders{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 130px);
+    overflow: auto;
+    padding-top: 20px;
+    &__card{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

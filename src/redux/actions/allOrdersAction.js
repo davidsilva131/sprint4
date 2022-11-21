@@ -28,6 +28,27 @@ export const getOrdersAsync = (user) => {
     }
 }
 
+export const getAdminOrders = () => {
+    return async (dispatch) => {
+        const querySnapshot = await getDocs(ordersCollection);
+        const orders = []
+        try {
+            querySnapshot.forEach(element => {
+                const order = {
+                    id: element.id,
+                    ...element.data()
+                }
+                orders.push(order)
+            })
+        } catch (error) {
+            console.log(error)
+        } finally {
+            dispatch(getOrdersSync(orders))
+        }
+    }
+}
+
+
 const getOrdersSync = (orders) => {
     return {
         type: allOrdersTypes.GET_ORDERS,
@@ -52,6 +73,7 @@ const newOrderSync = (order) => {
         payload: order
     }
 }
+
 
 
 
