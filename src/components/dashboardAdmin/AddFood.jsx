@@ -2,6 +2,7 @@ import { CircularProgress, Container, FormControl, InputLabel, MenuItem, Select 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { addNewFoodAsync } from "../../redux/actions/restaurantsAction";
 import { fileUpLoad } from "../../services/fileUpload";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
@@ -34,6 +35,13 @@ const AddFood = () => {
             aditionalIngredients: []
         }
         dispatch(addNewFoodAsync(newFood, tempRestaurant[0].id))
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'New food added',
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
     return (
         <Container>

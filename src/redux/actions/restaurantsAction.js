@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { collection, getDocs, doc, getDoc, addDoc, updateDoc, arrayUnion, deleteDoc } from "firebase/firestore";
 import { database } from "../../firebase/firebaseConfig";
 import { restaurantsTypes } from "../types/restaurantsTypes";
@@ -113,6 +114,10 @@ export const updateRestaurantAsync = (restaurant, id) => {
             dispatch()
         }
     }
+}
+
+export const updateFoodAsync = (food, id) => {
+
 }
 
 export const deleteRestaurantAsync = (id) => {

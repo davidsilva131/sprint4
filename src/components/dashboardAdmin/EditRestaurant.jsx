@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import { updateRestaurantAsync } from "../../redux/actions/restaurantsAction";
 import { fileUpLoad } from "../../services/fileUpload";
 import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
@@ -43,6 +44,13 @@ const EditRestaurant = () => {
             image: photoUrl,
         }
         dispatch(updateRestaurantAsync(restaurantUpdated, id))
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Restaurant has been edited',
+            showConfirmButton: false,
+            timer: 1500
+        })
         navigate('/home')
     }
 

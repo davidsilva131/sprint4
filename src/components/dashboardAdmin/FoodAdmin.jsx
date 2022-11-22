@@ -19,7 +19,14 @@ const FoodAdmin = () => {
     }, []);
 
     const handleOpen = (text, food) => {
-        console.log(`${text} ${food.name}`);
+        switch (text) {
+            case 'Edit':
+                navigate(`/editfood/${food}`)
+                break;
+
+            default:
+                break;
+        }
     }
 
     const handleAddFood = () => {
@@ -51,8 +58,8 @@ const FoodAdmin = () => {
                                                 </div>
                                             </CardContent>
                                             <CardActions>
-                                                <Button onClick={() => { handleOpen('Edit', food) }} size="small">Edit</Button>
-                                                <Button onClick={() => { handleOpen('Delete', food) }} size="small">Delete</Button>
+                                                <Button onClick={() => { handleOpen('Edit', food.name) }} size="small">Edit</Button>
+                                                <Button onClick={() => { handleOpen('Delete', food.name) }} size="small">Delete</Button>
                                             </CardActions>
                                         </Card>
                                     )

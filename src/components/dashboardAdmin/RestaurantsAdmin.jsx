@@ -1,8 +1,8 @@
 import { Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ColorButton, CssTextField } from "../styledComponents/MaterialComponents";
+import { ColorButton } from "../styledComponents/MaterialComponents";
 import Swal from 'sweetalert2'
 import './RestaurantsAdmin.scss'
 import { deleteRestaurantAsync, getRestaurantsAsync } from "../../redux/actions/restaurantsAction";
