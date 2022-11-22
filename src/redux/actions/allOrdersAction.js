@@ -1,5 +1,5 @@
 import { async } from "@firebase/util";
-import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { database } from "../../firebase/firebaseConfig";
 import { allOrdersTypes } from '../types/allOrdersTypes'
 
@@ -71,6 +71,29 @@ const newOrderSync = (order) => {
     return {
         type: allOrdersTypes.NEW_ORDER,
         payload: order
+    }
+}
+
+export const updateOrderAsync = (order, id) => {
+    return async (dispatch) => {
+        try {
+            const orderRef = doc(database, collectionName, id)
+            const docs = await updateDoc(orderRef, {
+                ...order
+            })
+        } catch (error) {
+            dispatch()
+        }
+    }
+}
+
+export const deleteOrderAsync = (id) => {
+    return async (dispatch) => {
+        try {
+            await deleteDoc(doc(database, collectionName, id))
+        } catch (error) {
+            dispatch()
+        }
     }
 }
 
